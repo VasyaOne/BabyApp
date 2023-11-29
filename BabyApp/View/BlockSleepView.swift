@@ -8,19 +8,36 @@
 import SwiftUI
 
 struct BlockSleepView: View {
+    
+    @State private var isShowRed = false
+    
+    @State private var barSleepTotal: Float = SleepModel().scaleSleep
+    @State private var barSleepValue: Float = SleepModel().valueSleep
+    @State private var textSleepValue: String = SleepModel().textSleep
+    
     var body: some View {
         
         ZStack {
             
+            if SleepModel().valueSleep < 5 {
+                
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color(UIColor.red))
+                    .frame(width: .infinity, height: 149)
+                    .shadow(color: .red, radius: 10)
+                    .onAppear { isShowRed.toggle() }
+                
+            }
+            
             RoundedRectangle(cornerRadius: 15)
-                .fill(Color(UIColor.secondarySystemBackground))
+                .fill(isShowRed ? Color("ColorDarkRed") : Color(UIColor.secondarySystemBackground))
                 .frame(width: .infinity, height: 149)
             
             HStack (alignment: .top) {
                
                 Image("Smile")
                     .renderingMode(.template)
-                    .foregroundColor(Color(UIColor.white))
+                    .foregroundColor(isShowRed ? Color("ColorLineRed") : Color(UIColor.white))
                     .padding(.leading)
                     .padding(.top)
                
@@ -30,7 +47,36 @@ struct BlockSleepView: View {
                         .foregroundStyle(.white)
                         .font(.system(size: 20))
                     
-                    SliderView(trackGradient: LinearGradient(gradient: Gradient(colors: [.red, .yellow, .green]), startPoint: .leading, endPoint: .trailing))
+                    //MARK: Line
+                    GeometryReader { screen in
+                        
+                        ZStack (alignment: .leading){
+                            
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(LinearGradient(colors:[Color("ColorLineRedDark"), Color("ColorLineRed"), Color("ColorLineYelow"), Color("ColorLineGreen")], startPoint: .leading, endPoint: .trailing))
+                                .frame(width: .infinity, height: 9)
+                            
+                            ZStack {
+                                
+                                Circle()
+                                    .fill(Color(UIColor.secondarySystemBackground))
+                                    .frame(width: 24, height: 24)
+                                
+                                Circle()
+                                    .foregroundColor(.yellow)
+                                    .frame(width: 17, height: 17)
+                                
+                            }
+                            .offset(x: screen.size.width * CGFloat(barSleepValue) / CGFloat(barSleepTotal))
+                            
+                        }
+                        Text("\(textSleepValue) hours")
+                            .font(.system(size: 14))
+                            .offset(x: screen.size.width * CGFloat(barSleepValue) / CGFloat(barSleepTotal) - 15, y: 25)
+                        
+                    }
+                    .frame(height: 40)
+                    .padding(.bottom, 25)
                     
                     HStack {
                         ZStack {
