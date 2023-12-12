@@ -4,61 +4,19 @@
 //
 //  Created by Vasiliy on 28.11.2023.
 //
+/*
+1) Расхождение с дизайном в цветах, размерах кнопок и отступах большое
+2) Хотелось бы переиспользование кода бабблов
+3) элементы должны быть сделаны полноценно (например кнопка "Learn more" должна быть нажимаемой кнопкой, пусть ничего не делает, но это кнопка)
+4) сделать DataManager где будут храниться все данные и передавать эти данные в баблы
+5) Я открыла в светлой теме - там все плохо
+*/
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        
-        //MARK: Lable
-        
-        HStack{
-            VStack (alignment: .leading){
-                HStack {
-                    Text("Wednesday")
-                        .font(.system(size: 32))
-                        .bold()
-                    Circle()
-                        .frame(width: 10)
-                        .foregroundColor(.red)
-                }
-                Text("November 1")
-                    .font(.system(size: 14))
-            }
-            
-            Spacer()
-            
-            Image("ImageCalendar")
-                .renderingMode(.template)
-                .foregroundColor(Color(UIColor.white))
-                .padding(.horizontal)
-
-        }
-        .padding()
-        
-        //MARK: Scroll
-        
-        ScrollView {
-            
-            VStack (spacing: 15){
-                
-                BlockMoodsView()
-                    .padding(.horizontal)
-                
-                BlockBooldView()
-                    .padding(.horizontal)
-                
-                BlockShugarView()
-                    .padding(.horizontal)
-                
-                BlockBMIView()
-                    .padding(.horizontal)
-                
-                BlockSleepView()
-                    .padding(.horizontal)
-
-            }
-        }
+        AnalysisResultView()
     }
 }
 
