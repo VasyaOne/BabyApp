@@ -10,7 +10,8 @@ import SwiftUI
 struct AnalysisResultProgressView: View {
     
     let value: AnalysisResultModel.ValueModel
-    let trackGradient: [Color]
+//    let trackGradient: [Color]
+    let trackGradient: GradientChoice
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -26,7 +27,7 @@ struct AnalysisResultProgressView: View {
                     RoundedRectangle(cornerRadius: 15)
                         .fill(
                             LinearGradient(
-                                colors: trackGradient,
+                                colors: trackGradient.colors,
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -61,7 +62,7 @@ struct AnalysisResultProgressView_Preview: PreviewProvider {
     static var previews: some View {
         AnalysisResultProgressView(
             value: .example5,
-            trackGradient: [Color.lineRedDark, Color.lineRed, Color.lineYelow, Color.lineGreen]
+            trackGradient: GradientChoice.one
         )
     }
 }

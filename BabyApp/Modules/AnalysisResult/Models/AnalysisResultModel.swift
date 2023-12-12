@@ -127,3 +127,21 @@ extension AnalysisResultModel.ValueModel {
         text: "mmHg"
     )
 }
+
+
+enum GradientChoice {
+    case one
+    case two
+    case three
+    
+    var colors: [Color] {
+        switch self {
+        case .one:
+            return [Color.lineRedDark, Color.lineRed, Color.lineYelow, Color.lineGreen]
+        case .two:
+            return [Color.lineRedDark, Color.lineRed, Color.lineYelow, Color.lineGreen, Color.lineYelow, Color.lineRed, Color.lineRedDark ]
+        case .three:
+            return [Color.lineGreen, Color.lineYelow, Color.lineRed, Color.lineRedDark]
+        }
+    }
+}

@@ -19,6 +19,7 @@ struct AnalysisResultCell: View {
     var body: some View {
         
         HStack {
+            
             VStack(spacing: 20) {
                 
                 HStack (alignment: .top){
@@ -35,10 +36,24 @@ struct AnalysisResultCell: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         ForEach(item.value, id: \.hashValue) { value in
-                            AnalysisResultProgressView(
-                                value: value,
-                                trackGradient: [Color.lineRedDark, Color.lineRed, Color.lineYelow, Color.lineGreen]
-                            )
+                            if item.idBubble == 1 || item.idBubble == 5 {
+                                AnalysisResultProgressView(
+                                    value: value,
+                                    trackGradient: GradientChoice.one
+                                )
+                                
+                            } else if item.idBubble == 2 || item.idBubble == 4 {
+                                AnalysisResultProgressView(
+                                    value: value,
+                                    trackGradient: GradientChoice.two
+                                )
+                                
+                            } else {
+                                AnalysisResultProgressView(
+                                    value: value,
+                                    trackGradient: GradientChoice.three
+                                )
+                            }
                         }
                         
                         HStack {
